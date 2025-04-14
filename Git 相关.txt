@@ -1,0 +1,15 @@
+# 1. 先测试网络
+ping github.com
+
+# 2. 尝试关闭代理/VPN
+git config --global --unset http.proxy
+git config --global --unset https.proxy
+
+# 3. 改用 SSH 或调整 hosts
+git clone git@github.com:Noah-Wei/WorkSpace_PLSQL.git
+
+# 4. 终极方案：下载 ZIP
+# 浏览器访问 https://github.com/Noah-Wei/WorkSpace_PLSQL，点击 "Code" → "Download ZIP"
+
+刷新DNS缓存
+ipconfig /flushdns
