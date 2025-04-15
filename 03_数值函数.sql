@@ -52,3 +52,4 @@ SELECT TRUNC(SYSDATE) FROM dual;
 
 唯一的缺点就是中文的间隔太大
 十点多
+asd
