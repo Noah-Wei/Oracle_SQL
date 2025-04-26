@@ -50,3 +50,39 @@ SELECT TRUNC(123.6567,-2) AS "截取小数点后两位" FROM DUAL;
 -- 截取日期
 SELECT TRUNC(SYSDATE) FROM dual;  
 
+-- 3.mod()：取余函数
+SELECT MOD(10,3) FROM dual;
+
+SELECT MOD(10,5) FROM dual;
+
+SELECT MOD(3,10) FROM dual;
+
+-- 取余数企业中实战
+-- 判断奇偶性
+SELECT '偶数' FROM dual WHERE MOD(6,2)=0;
+SELECT '奇数' FROM dual WHERE MOD(6,2)<>0;
+
+-- 数值函数扩展
+/*
+dbms_random:oracl内置的包结构
+   在该包结构下面有内置的获取随机数函数 value
+*/
+-- value()默认随机情况，最小值0，最大值不到1，所以0~1之间的小数
+SELECT dbms_random.value() FROM dual;
+
+-- 需求：随机10~20之间整数
+SELECT TRUNC(dbms_random.value(10,21)) FROM dual;
+-- 方式2
+SELECT TRUNC(dbms_random.value()*11+10) FROM dual;
+
+-- 需求：随机产生5个整数，范围在10~20之间
+SELECT 
+   TRUNC(dbms_random.value(10,21)),TRUNC(dbms_random.value(10,21)),
+   TRUNC(dbms_random.value(10,21)),TRUNC(dbms_random.value(10,21)),
+   TRUNC(dbms_random.value(10,21)) 
+FROM dual;
+-- 方式2
+-- level :伪列
+SELECT  TRUNC(dbms_random.value(10,21)) FROM dual  CONNECT BY LEVEL < 6;
+
+
