@@ -11,5 +11,5 @@ git clone git@github.com:Noah-Wei/WorkSpace_PLSQL.git
 # 4. 终极方案：下载 ZIP
 # 浏览器访问 https://github.com/Noah-Wei/WorkSpace_PLSQL，点击 "Code" → "Download ZIP"
 
-刷新DNS缓存
+# 刷新DNS缓存
 ipconfig /flushdns
