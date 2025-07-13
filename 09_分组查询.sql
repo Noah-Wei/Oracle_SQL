@@ -1,0 +1,39 @@
+﻿/*
+1.分组查询语法结构
+SELECT
+  分组列名,...,列函数
+FROM 表明
+WHERE 条件
+GROUP BY 分组列名,...
+HAVING 分组条件
+ORDER BY 分组列名,..;
+*/
+
+-- 2.查询每个部门人数
+SELECT DEPTNO, COUNT(1) FROM EMP GROUP BY DEPTNO;
+
+-- 查询每个部门的平均工资
+SELECT DEPTNO, AVG(SAL) FROM EMP GROUP BY DEPTNO;
+
+-- 查询每个部门的年薪
+SELECT DEPTNO, SUM(SAL + NVL(COMM, 0)) * 12 FROM EMP GROUP BY DEPTNO;
+
+/*3.分组查询注意事项：
+普通列与分组函数同时查询，必须按照普通列分组*/
+
+-- having字句
+-- 显示出平均工资大于2000的部门编号和该部门的平均工资
+SELECT DEPTNO, AVG(SAL) FROM EMP GROUP BY DEPTNO HAVING AVG(SAL) > 2000 ORDER BY DEPTNO;
+
+-- 5.分组查询执行顺序
+FROM —— > WHERE —— > GROUP BY —— > HAVING —— >
+    SELECT —— > ORDER BY;
+
+SELECT * FROM EMP;
+
+SELECT JOB, SUM(SAL) AS SUM1
+  FROM EMP
+ WHERE JOB <> 'CLERK'
+ GROUP BY JOB
+HAVING SUM(SAL) > 5000
+ ORDER BY SUM1;

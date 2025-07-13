@@ -1,0 +1,174 @@
+﻿-- 1.多表查询基本格式
+-- 查询员工的编号，姓名，部门编号，部门名称
+SELECT E.EMPNO, E.ENAME, E.DEPTNO, D.DNAME FROM EMP E, DEPT D WHERE E.DEPTNO = D.DEPTNO;
+
+SELECT COUNT(1)
+  FROM (SELECT E.EMPNO, E.ENAME, E.DEPTNO, D.DEPTNO FROM EMP E, DEPT D ORDER BY E.EMPNO);
+
+-- 自连接
+-- 查询员工的姓名，工作和上级领导
+SELECT E1.ENAME, E1.JOB, E2.ENAME FROM EMP E1 LEFT JOIN EMP E2 ON E1.MGR = E2.EMPNO;
+
+-- 多表查询
+-- 查询员工的姓名，工作和上级领导姓名、雇员所在的部门名称
+SELECT E1.ENAME AS 姓名, E1.JOB AS 工作, E2.ENAME AS 领导名, D.DNAME AS 部门名称
+  FROM EMP E1
+  LEFT JOIN EMP E2
+    ON E1.MGR = E2.EMPNO
+  LEFT JOIN DEPT D
+    ON E1.DEPTNO = D.DEPTNO;
+
+-- 查询每个雇员的姓名、工资、部门名称、工资在公司的等级、以及领导的姓名及其工资所在的等级
+-- 方式1
+SELECT E.ENAME,
+       E.SAL AS 雇员工资,
+       D.DNAME,
+       CASE
+           WHEN E.SAL >= 700 AND E.SAL <= 1200 THEN
+            1
+           WHEN E.SAL >= 1201 AND E.SAL <= 1400 THEN
+            2
+           WHEN E.SAL >= 1401 AND E.SAL <= 2000 THEN
+            3
+           WHEN E.SAL >= 2001 AND E.SAL <= 3000 THEN
+            4
+           WHEN E.SAL >= 3001 AND E.SAL <= 9999 THEN
+            5
+           ELSE
+            NULL
+       END AS 员工工资等级,
+       E2.ENAME AS 领导姓名,
+       CASE
+           WHEN E2.SAL >= 700 AND E2.SAL <= 1200 THEN
+            1
+           WHEN E2.SAL >= 1201 AND E2.SAL <= 1400 THEN
+            2
+           WHEN E2.SAL >= 1401 AND E2.SAL <= 2000 THEN
+            3
+           WHEN E2.SAL >= 2001 AND E2.SAL <= 3000 THEN
+            4
+           WHEN E2.SAL >= 3001 AND E2.SAL <= 9999 THEN
+            5
+           ELSE
+            NULL
+       END AS 领导工资等级
+  FROM EMP E
+  LEFT JOIN DEPT D
+    ON E.DEPTNO = D.DEPTNO
+  LEFT JOIN EMP E2
+    ON E.MGR = E2.EMPNO
+ ORDER BY 雇员工资;
+
+-- 方式2:查询每个雇员的姓名、工资、部门名称、工资在公司的等级、以及领导的姓名及其工资所在的等级
+SELECT E.ENAME  AS 雇员名,
+       E.SAL    AS 雇员工资,
+       D.DNAME  AS 部门名,
+       S.GRADE  AS 员工工资等级,
+       E2.ENAME AS 领导姓名,
+       S2.GRADE AS 领导工资等级
+  FROM EMP E
+  LEFT JOIN DEPT D
+    ON E.DEPTNO = D.DEPTNO
+  LEFT JOIN SALGRADE S
+    ON E.SAL BETWEEN S.LOSAL AND S.HISAL
+  LEFT JOIN EMP E2
+    ON E.MGR = E2.EMPNO
+  LEFT JOIN SALGRADE S2
+    ON E2.SAL BETWEEN S2.LOSAL AND S2.HISAL
+ ORDER BY 雇员工资;
+
+--------------------------------------------------------------------------
+CREATE TABLE TNAME(TEAM_NAME VARCHAR2(20));
+INSERT INTO TNAME VALUES ('中国');
+INSERT INTO TNAME VALUES ('韩国');
+INSERT INTO TNAME VALUES ('日本');
+INSERT INTO TNAME VALUES ('朝鲜');
+SELECT * FROM TNAME;
+
+--
+SELECT T1.TEAM_NAME || 'VS' || T2.TEAM_NAME
+  FROM TNAME T1
+ INNER JOIN TNAME T2
+    ON T1.TEAM_NAME < T2.TEAM_NAME;
+
+SELECT T1.TEAM_NAME || 'VS' || T2.TEAM_NAME
+  FROM TNAME T1
+  JOIN TNAME T2
+    ON T1.TEAM_NAME < T2.TEAM_NAME;
+---------------------
+外连接： 左外连接 右外连接 全外连接;
+-- 查询员工编号，姓名，所在部门号，部门名称
+SELECT E.EMPNO, E.ENAME, E.DEPTNO, D.DNAME
+  FROM EMP E
+  LEFT JOIN DEPT D
+    ON E.DEPTNO = D.DEPTNO;
+
+SELECT E.EMPNO, E.ENAME, D.DEPTNO, D.DNAME
+  FROM EMP E
+ RIGHT JOIN DEPT D
+    ON E.DEPTNO = D.DEPTNO;
+
+-- 查询员工编号、姓名，领导编号和姓名
+SELECT E1.EMPNO, E1.ENAME, E2.EMPNO, E2.ENAME
+  FROM EMP E1
+  LEFT JOIN EMP E2
+    ON E1.MGR = E2.EMPNO;
+
+-- 自然连接
+SELECT * FROM EMP E1 NATURAL JOIN EMP E2;
+
+-- 全外连接
+SELECT E1.EMPNO, E1.ENAME, E2.EMPNO, E2.ENAME
+  FROM EMP E1
+  FULL JOIN EMP E2
+    ON E1.MGR = E2.EMPNO;
+
+-------------
+SELECT EMPNO,HIREDATE,
+       CASE
+           WHEN TO_CHAR(HIREDATE, 'MM') BETWEEN 1 AND 3 THEN
+            '第一季度'
+           WHEN TO_CHAR(HIREDATE, 'MM') BETWEEN 4 AND 6 THEN
+            '第二季度'
+           WHEN TO_CHAR(HIREDATE, 'MM') BETWEEN 7 AND 9 THEN
+            '第三季度'
+           WHEN TO_CHAR(HIREDATE, 'MM') BETWEEN 10 AND 12 THEN
+            '第四季度'
+       END AS "入职时间"
+  FROM EMP;
+ 
+SELECT to_char(hiredate,'MM') FROM emp;
+
+CREATE TABLE A1(ID NUMBER);
+CREATE TABLE A2(ID NUMBER);
+
+INSERT ALL
+INTO A1 VALUES(1)
+INTO A1 VALUES(1)
+INTO A1 VALUES(1)
+INTO A1 VALUES(1)
+INTO A1 VALUES(1)
+INTO A1 VALUES(1)
+INTO A2 VALUES(1)
+INTO A2 VALUES(1)
+INTO A2 VALUES(1)
+INTO A2 VALUES(1)
+SELECT 1 FROM DUAL;
+
+INSERT INTO A1 VALUES(2);
+INSERT INTO A1 VALUES(3);
+--
+INSERT INTO A2 VALUES(3);
+INSERT INTO A2 VALUES(4);
+INSERT INTO A2 VALUES(5);
+
+--
+SELECT * FROM A1;
+SELECT * FROM A2;
+-- 内连接
+SELECT COUNT(1) FROM A1 JOIN A2 ON A1.ID= A2.ID;
+-- 左外连接
+SELECT COUNT(1) FROM A1 LEFT JOIN A2 ON A1.ID= A2.ID;
+SELECT * FROM A1 LEFT JOIN A2 ON A1.ID= A2.ID;
+-- 右外连接
+SELECT COUNT(1) FROM A1 RIGHT JOIN A2 ON A1.ID= A2.ID;
