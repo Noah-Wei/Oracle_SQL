@@ -1,0 +1,71 @@
+﻿-- 查询表
+SELECT * FROM E;
+SELECT * FROM MY_EMP;
+
+-- 清空表中数据
+TRUNCATE TABLE MY_EMP;
+TRUNCATE TABLE E;
+TRUNCATE TABLE E_20;
+TRUNCATE TABLE E_30;
+
+-- 案例1：使用 INSERT ALL 批量插入多表数据
+INSERT ALL
+    INTO MY_EMP(EMPNO, ENAME, DEPTNO) VALUES (1, 'XXX', 10)
+    INTO MY_EMP(EMPNO, ENAME, SAL, COMM) VALUES (2, 'YYY', 2500, 0)
+    INTO E(员工姓名, 员工工资) VALUES ('张三', 1000)
+    INTO E VALUES ('李四', 2000, 10, '财务部')
+SELECT 1 FROM DUAL;
+
+-- 案例2：单行插入
+INSERT ALL
+    INTO E VALUES ('王五', 3000, 20, NULL)
+SELECT 1 FROM DUAL;
+
+-- 案例3：从 EMP 表查询插入
+INSERT ALL
+    INTO E VALUES ('赵六', 4000, 30, '经理秘书')
+SELECT 1 FROM EMP;
+
+-- 删除特定数据
+DELETE FROM E WHERE 员工姓名 = '赵六';
+
+-- 简单查询（可能用于验证）
+SELECT 1 FROM EMP;
+
+-- 案例4：使用 WITH 子查询 + UNION ALL 批量插入
+INSERT ALL
+    INTO E(员工姓名, 员工工资, 部门编号, 部门名称)
+    WITH 
+    T1 AS (SELECT '一号', 1000, 30, '总裁办' FROM DUAL),
+    T2 AS (SELECT '二号', 2000, 20, '销售部' FROM DUAL),
+    T3 AS (SELECT '三号', 3000, 10, '人事部' FROM DUAL)
+    SELECT * FROM T1 
+    UNION ALL 
+    SELECT * FROM T2 
+    UNION ALL 
+    SELECT * FROM T3;
+
+-- 案例5：使用 INSERT ALL + WHEN 条件判断插入不同表
+-- 创建副本表（基于 E 表结构）
+CREATE TABLE E_20 AS SELECT * FROM E;
+CREATE TABLE E_30 AS SELECT * FROM E;
+
+-- 查询表数据（验证用）
+SELECT * FROM E;
+SELECT * FROM E_20;
+SELECT * FROM E_30;
+
+-- 条件插入：根据 DEPTNO 决定插入目标表
+INSERT ALL
+    WHEN DEPTNO = 10 THEN INTO E 
+    WHEN DEPTNO = 20 THEN INTO E_20
+    ELSE INTO E_30
+SELECT 
+    E.ENAME, 
+    E.SAL, 
+    E.DEPTNO, 
+    D.DNAME 
+FROM 
+    EMP E
+    JOIN DEPT D ON E.DEPTNO = D.DEPTNO;
+    
