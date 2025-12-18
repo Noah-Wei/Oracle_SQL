@@ -1,0 +1,60 @@
+﻿-- 1.并集：union all 与union
+-- 查询工资大于2000或者部门为10的
+SELECT *
+FROM   EMP
+WHERE  SAL > 2000
+       OR DEPTNO = 10;
+
+-- 方式2
+SELECT *
+FROM   EMP
+WHERE  SAL > 2000
+UNION
+SELECT *
+FROM   EMP
+WHERE  DEPTNO = 10;
+
+-- 交集：intersect，获取多表结果的共同部分
+-- 查询工资大于2000和部门为10的
+SELECT *
+FROM   EMP
+WHERE  SAL > 2000
+       AND DEPTNO = 10;
+
+-- 方式2
+SELECT *
+FROM   EMP
+WHERE  SAL > 2000
+INTERSECT
+SELECT *
+FROM   EMP
+WHERE  DEPTNO = 10;
+
+-- 差集操作符：minus,获取在另一个表中无出现的数据
+CREATE TABLE A(AID NUMBER(12));
+
+CREATE TABLE B(BID NUMBER(12));
+
+INSERT INTO A VALUES (1);
+INSERT INTO A VALUES (2);
+INSERT INTO A VALUES (3);
+INSERT INTO B VALUES (1);
+INSERT INTO B VALUES (4);
+INSERT INTO B VALUES (5);
+
+-- 查询表
+SELECT * FROM a;
+SELECT * FROM b;
+
+-- 查询
+
+SELECT aid FROM a
+MINUS
+SELECT bid FROM b;
+
+SELECT bid FROM b
+MINUS
+SELECT aid FROM a;
+
+
+SELECT aid,ROWNUM FROM a;

@@ -1,0 +1,28 @@
+﻿-- 1.提取日期或者时间方式
+-- trunc函数，返回日期类型
+-- to_char函数，返回字符串类型
+-- extract函数，返回字符串类型
+SELECT SYSDATE FROM DUAL;
+
+SELECT TRUNC(SYSDATE, 'yyyy') FROM DUAL;
+
+SELECT TO_CHAR(SYSDATE, 'yyyy') FROM DUAL;
+
+SELECT EXTRACT(YEAR FROM SYSDATE) 年,
+       EXTRACT(MONTH FROM SYSDATE) 月,
+       EXTRACT(DAY FROM SYSDATE) 日,
+       EXTRACT(HOUR FROM SYSTIMESTAMP) 小时,
+       EXTRACT(MINUTE FROM SYSTIMESTAMP) 分钟
+FROM   DUAL;
+
+-- 2.获取系统当前日期
+SELECT SYSDATE FROM DUAL;
+
+-- 3.获取当前系统更准确的时间戳(精确到秒单位后的后6位小数)
+SELECT SYSTIMESTAMP FROM DUAL;
+
+-- 4.时间转换韩式：to_date
+SELECT TO_DATE('2025-01-22 15:02:10', 'YYYY-MM-DD HH24:MI:SS'),
+       TO_TIMESTAMP('2025-01-22 15:02:10', 'YYYY-MM-DD HH24:MI:SS')
+FROM   DUAL;
+-- 5.时间戳转换函数：to_timestamp
