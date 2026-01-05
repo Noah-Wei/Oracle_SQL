@@ -1,4 +1,0 @@
-﻿clear screen;
-
--- 1.伪列
-select rowid,e.* from emp e;
