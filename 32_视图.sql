@@ -1,5 +1,5 @@
 ﻿/*
-31.视图：数据库对象
+1.视图：数据库对象
     封装/存储一张表或者多张表的连接、子查询、分组、集合操作符等等的操作集合
     本身是虚拟的表
 2.视图特点：本身是虚拟的表，并不占用内存空间去存储数据
@@ -16,7 +16,7 @@ SELECT TABLE_NAME FROM USER_TABLES;
 -- 第一个创建视图，需要授权(必须是sysdba身份登陆)
 GRANT CREATE VIEW TO SCOTT;
 -- view 称之为视图
-CREATE OR REPLACE VIEW V_EMP AS
+CREATE OR REPLACE VIEW V_EMP AS 
     SELECT * FROM STU;
 
 -- 查看视图

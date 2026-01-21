@@ -1,0 +1,12 @@
+﻿DML:数据操纵语言
+    INSERT
+    UPDATE
+    DELETE
+    SELECT
+DDL:数据定义语言
+    CREATE TABLE
+    ALTER TABLE
+    DROP TABLE
+    CREATE INDEX
+    DROP INDEX
+DCL:    
