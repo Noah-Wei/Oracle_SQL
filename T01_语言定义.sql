@@ -9,4 +9,11 @@ DDL:数据定义语言
     DROP TABLE
     CREATE INDEX
     DROP INDEX
-DCL:    
+DCL:数据控制语言（运维）
+    GRANT
+    REVOKE
+    COMMIT
+    ROLLBACK
+    SAVEPOINT
+    LOCK
+    
