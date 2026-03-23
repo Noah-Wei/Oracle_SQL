@@ -1,0 +1,65 @@
+qq机器人
+	1903406636
+	2zjFYdU6TbU8XieK
+
+
+
+
+ssh -N -L 18789:127.0.0.1:18789 root@111.229.69.144
+
+
+localhost:18789
+
+
+我现在有一个想法。请帮我分析一下，可不可行：我的电脑本地有一个文件夹CODE1，专门用来存放代码，然后我下载了vscode，ssh连接上了远程服务器。我想把这个code1文件夹上传到云服务器上面，并且能够在vscode中查看到。同时我希望他们能够同步，比如，我本地做了修改，vscode连接的原生服务器上面的文件也做了修改。反之一样
+
+
+如果我需要版本管理选方案 2。我有几个内容需要补充一下，然后帮我分析一下影响不影响。我的电脑本地已经安装了git，然后我会手动的使用github desktop应用把内容推送到github上，这个和我vscode会有影响吗？
+
+
+
+git config --global user.name "Noah"
+
+# 设置全局邮箱（替换成你的邮箱，比如 "zhangsan@example.com"）
+git config --global user.email "noahwei3012@gmail.com"
+
+那我现在两种方式方式哪一个比较好？
+一份代码，放在三个地方。本地，云服务器，githun仓库。并且我云服务器我会使用vscode进行ssh直接编写
+。方式1：本地代码通过github desktop应用把内容推送到github上，也同步到云服务器上面
+方式2：本地代码通过github desktop应用把内容推送到github上。然后云服务器通过git拉取github上上面的仓库
+
+我的云服务器在上海腾讯云，使用vscode远程ssh连接上，然后克隆一份github的仓库下来，并且我修改代码后，有时候上传不了
+
+
+ssh-keygen -t ed25519 -C "noahwei3012@gmail.com"
+
+
+我买了一个腾讯云的云服务器，然后我使用了openclaw的模板应用安装系统。我发现他是ubuntu系统。然后有两个账号，一个ubuntu，还有一个是root。我正常使用哪一个比较好？
+
+现在安装了openclaw。我不仅想在服务器上面用这个，我还需要把我的vacode和pycharm代码放进去。我应该在什么地方创建什么目录文件夹来存放这些代码，或者别的信息。
+
+Wxq12153012@
+
+
+
+
+
+也就是说现在/home/ubuntu/projects/demopy目录中有一个venv文件夹来存放的是只属于该项目的python环境。那我有几个问题。
+1.如果我source venv/bin/activate激活了环境，我在/home/ubuntu/projects/demopy目录下的py文件，运行的话，都是调用的虚拟环境吗？
+2.假如/home/ubuntu/projects/下有一个abc.py文件，我允许的话，使用的系统py还是虚拟环境。运行的命令是python /home/ubuntu/projects/abc.py
+
+那假如我/home/ubuntu/projects/demopy把在这个项目文件中创建并且激活了虚拟环境，没有退出虚拟环境。然后我直接切换到了上级目录/home/ubuntu/projects/运行了abc.py文件，这时候调用的是虚拟环境？
+
+那假如我在/home/ubuntu/projects/下面有两个项目A和B，都分别创建了一个虚拟环境venv_a和venv_b。那么我进入A项目，激活了虚拟环境venv_a。然后在进去B项目目录中，必须先手动的deactivate关掉项目A的虚拟环境。然后激活b的虚拟环境，然后使用？
+
+
+也就是说，一个窗口中，最多只会存在一个虚拟环境，并且这个虚拟环境是最后激活的那一个
+
+但是一个窗口中可以存在一个系统环境和一个虚拟环境，是吧。
+
+那假如我激活了一个虚拟环境venv_a，但是我没有deactive关掉。然后我关掉了窗口，然后我又打开了窗口，在项目目录下运行python a.py命令，他用的是哪一个环境？
+
+那假如我激活了一个虚拟环境venv_a，但是我没有deactive关掉。然后我关掉了窗口，然后我又打开了窗口，在项目目录下运行python a.py命令，我想使用虚拟环境venv_a，必须得先运行source /home/ubuntu/projects/A/venv_a/bin/activate命令激活是吧
+
+
+我的服务器在腾讯云，然后我使用了openclaw模板镜像直接安装了。但是我通过ssh -N -L 18789:127.0.0.1:18789 root@111.229.69.144命令然后运行localhost:18789可以打开web页面，但是我直接访问111.229.69.144:18789确实打不开，为什么？

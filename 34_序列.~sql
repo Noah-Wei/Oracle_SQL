@@ -30,7 +30,7 @@ CREATE SEQUENCE my_seq;
 -- 案例2：查询当前用户下所有的可用序列
 SELECT SEQUENCE_NAME FROM USER_SEQUENCES;
 
--- 案例3：产生默认形式序列当前值与下一个值·
+-- 案例3：产生默认形式序列当前值与下一个值
 SELECT my_seq.nextval  FROM dual;
 SELECT my_seq.currval 当前值,my_seq.nextval 下一值 FROM dual;
 
