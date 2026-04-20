@@ -7,4 +7,5 @@ SELECT * FROM emp;
 
 INSERT INTO my_emp (empno,ename,deptno) VALUES(8001,'张三',40);
 
-张三
+SELECT * FROM my_emp;
+

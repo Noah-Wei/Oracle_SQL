@@ -1,8 +1,9 @@
-CREATE TABLE my_emp AS SELECT * FROM emp;
+ï»¿CREATE TABLE my_emp AS SELECT * FROM emp;
 
 
 DROP TABLE my_emp;
 
 SELECT * FROM emp;
 
-INSERT INTO my_emp (empno,ename,deptno) VALUES(8001,'ÕÅÈý',40);
+INSERT INTO my_emp (empno,ename,deptno) VALUES(8001,'å¼ ä¸‰',40);
+
