@@ -1,11 +1,1 @@
-﻿CREATE TABLE my_emp AS SELECT * FROM emp;
-
-
-DROP TABLE my_emp;
-
-SELECT * FROM emp;
-
-INSERT INTO my_emp (empno,ename,deptno) VALUES(8001,'张三',40);
-
-SELECT * FROM my_emp;
-
+﻿
