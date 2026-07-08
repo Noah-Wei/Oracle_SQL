@@ -75,3 +75,4 @@ SELECT 姓名, 编号 FROM V2;
 
 -- 4. 清理环境：删除表 E
 DROP TABLE E;
+

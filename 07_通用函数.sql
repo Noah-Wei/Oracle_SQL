@@ -1,6 +1,6 @@
 ﻿-- 1.通用函数值nvl2:
 --   语句：NVL2(参数1，参数2，参数3)
---   参数1 空置，返回   参数3 的值
+--   参数1 空值，返回   参数3 的值
 --   参数1 非空值，返回 参数2  的值
 SELECT NVL2('', '非空', '空值') FROM DUAL;
 SELECT NVL2('22', '非空', '空值') FROM DUAL;
@@ -18,7 +18,7 @@ SELECT NULLIF(1, 2) FROM DUAL;
 
 /*
 通用函数之DECODE：
-*/
+*/ 
 SELECT ENAME,
        DECODE(DEPTNO, 20, '20部门', 10, '20部门', 30, '30部门', '没有部门') AS "部门名称"
   FROM EMP;
@@ -34,7 +34,14 @@ SELECT CASE
             '女'
        END AS "判断男女"
   FROM DUAL;
-
+  
+SELECT CASE
+           WHEN MOD(&N, 2) = 1 THEN
+            '男'
+           WHEN MOD(&N, 2) != 1 THEN 
+            '女'
+       END AS "判断男女"
+  FROM DUAL;
 -- 2.利用 decode 函数，验证雇员表 emp 的员工入职时间，如果是6月份入职的，返回上半年，如果是7月份入职的，返回下半年，否则返回未知
 
 SELECT ENAME,
