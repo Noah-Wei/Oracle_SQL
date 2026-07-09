@@ -78,3 +78,14 @@ UPDATE v3 SET deptno=30 WHERE empno=7369;
 
 
 -- 视图作用：简化查询，屏蔽基表数据，防止任意的穿该，安全
+
+
+SELECT * FROM ee;
+
+CREATE OR REPLACE VIEW v_ee
+AS SELECT * FROM ee;
+
+SELECT * FROM v_ee;
+INSERT INTO v_ee VALUES (1111, 'sss','asd',7369,NULL,NULL,NULL,20);
+
+SELECT * FROM 
