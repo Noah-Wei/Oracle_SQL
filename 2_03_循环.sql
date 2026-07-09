@@ -43,7 +43,7 @@ BEGIN
     END LOOP;
 END;
 
--- 嵌套勋魂：循环内部套循环
+-- 嵌套循环：循环内部套循环
 DECLARE
 BEGIN
      FOR i IN 1.. 5          
